@@ -1,5 +1,5 @@
 % Runs the Simulink model for a PWM-supplied lamination core inductor
-% taking into account hystersis, eddy-current and excess losses in the
+% taking into account hysteresis, eddy-current and excess losses in the
 % laminated core.
 % 
 % Note: Accounting for the excess losses (cex > 0) causes an algebraic loop
@@ -14,9 +14,9 @@ addpath hyst util
 mu0 = 4*pi*1e-7;
 nu0 = 1/mu0;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Simulation parameters
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   % DC link voltage, modulation index, phase of the duty cycle and initial
   % value of the flux density. These need to be iterated to obtain the
@@ -53,9 +53,9 @@ nu0 = 1/mu0;
   R = 0.56;           % Resistance
   Lsig = 1.8735e-06;  % Leakage inductance
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Calculate some values
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
   % Simulink file name
   if nb == 1
@@ -161,9 +161,9 @@ nu0 = 1/mu0;
     tout = tout-tout(1);        
   end;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Handle results
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
   % Show Losses
   fprintf('  Hysteresis loss:           %g W/kg\n', phy(end));

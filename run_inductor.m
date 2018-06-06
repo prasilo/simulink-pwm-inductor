@@ -49,7 +49,7 @@ nu0 = 1/mu0;
   d = 0.35e-3;        % Thickness of core lamination
   sigma = 1/52e-8;    % Electrical conductivity of core
   dens = 7650;        % Mass density of core
-  cex = 0.3137;       % Excses loss coefficient
+  cex = 0.3137;       % Excess loss coefficient
   R = 0.56;           % Resistance
   Lsig = 1.8735e-06;  % Leakage inductance
 
@@ -62,7 +62,7 @@ nu0 = 1/mu0;
     sname = 'inductor';
   else
     sname = 'inductor_skineffect';
-  end;
+  end
 
   % Skin effect related terms
   if nb > 1
@@ -74,7 +74,7 @@ nu0 = 1/mu0;
     clear alfa
     for i = 1 : nb
       alfa(:,i) = cos((i-1)*z*2*pi);
-    end;
+    end
 
     % Dynamic coefficient matrix
     C = zeros(nb,nb);
@@ -88,20 +88,20 @@ nu0 = 1/mu0;
          cc = (-1)^(m+n+1)/(4*pi^2*(m+n)^2);
        else
          cc = 0;
-       end;
+       end
        C(m+1,n+1) = cc;
-     end;
-    end;
+     end
+    end
     C = sigma*d^2*C;
     Cinv = inv(C(2:end,2:end));
-  end;
+  end
 
   % Eddy-current loss resistance
   if nb == 1
     Rfe = N1^2*Afe/lfe/(sigma*d^2/12);
   else
     Rfe = N1^2*Afe/lfe/(sigma*d^2/12-C(1,2:end)*Cinv*C(2:end,1));
-  end;
+  end
 
   % Carrier frequency
   fcar = fs/2;
@@ -110,7 +110,7 @@ nu0 = 1/mu0;
   % Open Simulink file and scope for plotting
   if ~bdIsLoaded(sname)
     open_system(sname);
-  end;
+  end
   open_system([sname '/Scope for everything']);
 
   % If excess-loss coefficient is set to zero comment out the excess loss
@@ -120,14 +120,14 @@ nu0 = 1/mu0;
     set_param(blockname, 'commented', 'on');
   else
     set_param(blockname, 'commented', 'off');
-  end;
+  end
   
   % Simulation time
   if deadtime == 0
     dt = 150e-9;
   else
     dt = deadtime/2;
-  end;
+  end
   nper = round(1/f/dt);
   ntot = periods*nper;
   t = 0:dt:ntot*dt;
@@ -169,7 +169,7 @@ nu0 = 1/mu0;
   fprintf('  Hysteresis loss:           %g W/kg\n', phy(end));
   fprintf('  Eddy-current loss:         %g W/kg\n', pcl(end));
   fprintf('  Excess loss:               %g W/kg\n', pex(end));
-  fprintf('  Sum:                       %g W/kg\n', phy(end)+pcl(end));
+  fprintf('  Sum:                       %g W/kg\n', phy(end)+pcl(end)+pex(end));
   fprintf('  Total loss from B(H) loop: %g W/kg\n', ploop(end));
   
   % Plot B(H) loop
